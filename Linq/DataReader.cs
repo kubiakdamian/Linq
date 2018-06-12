@@ -55,10 +55,11 @@ namespace Linq
                 }
                 catch
                 {
-                    Console.WriteLine("There is no field named: " + name);
+                    Console.WriteLine("There is no field named: " + name + "\n");
                     break;
                 }           
             }
+            Console.WriteLine("\n");
         }
 
         public void printDoubleData(String first, String second)
@@ -76,10 +77,11 @@ namespace Linq
                 }
                 catch
                 {
-                    Console.WriteLine("Bad fields were given");
+                    Console.WriteLine("Bad fields were given\n");
                     break;
                 }
             }
+            Console.WriteLine("\n");
         }
 
         public void printDataWithPrice(String price)

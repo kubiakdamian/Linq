@@ -41,25 +41,46 @@ namespace Linq
             {
                 case 0:
                     Console.WriteLine("Goodbye");
-                    System.Threading.Thread.Sleep(3000);
+                    System.Threading.Thread.Sleep(1500);
                     Environment.Exit(0);
                     break;
                 case 1:
                     data.printAllData();
                     break;
                 case 2:
-                    data.printSortedData("YEAR");
+                    data.printSortedData(getElementValue());
                     break;
                 case 3:
-                    data.printSingleData("artist");
+                    data.printSingleData(getElementValue());
                     break;
                 case 4:
-                    data.printDoubleData("artist", "title");
+                    data.printDoubleData(getElementValue(), getElementValue());
                     break;
                 case 5:
-                    data.printDataWithPrice("10.20");
+                    data.printDataWithPrice(getPrice());
+                    break;
+                default:
+                    Console.WriteLine("Enter number from 0 to 5");
                     break;
             }
+        }
+
+        private static String getElementValue()
+        {
+            String elementName;
+            Console.WriteLine("Enter element's name: ");
+            elementName = Console.ReadLine();
+
+            return elementName;
+        }
+
+        private static String getPrice()
+        {
+            String elementName;
+            Console.WriteLine("Enter price: ");
+            elementName = Console.ReadLine();
+
+            return elementName;
         }
     }
 }
