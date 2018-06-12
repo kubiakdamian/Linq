@@ -18,10 +18,11 @@ namespace Linq
                 Environment.Exit(0);
             }
 
-            data.printData();
-            data.printSingleData("price");
+            data.printAllData();
+            data.printSortedData("PRICE");
+            data.printSingleData("artist");       
             data.printDoubleData("artist", "title");
-            data.printDataWithPrice();
+            data.printDataWithPrice("10.20");
 
             Console.ReadLine();
         }
