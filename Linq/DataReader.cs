@@ -21,31 +21,25 @@ namespace Linq
         public void printAllData()
         {
             Console.WriteLine("ALL DATA: \n");
-            foreach (var cd in cds)
-            {
-                Console.WriteLine("Title: " + cd.Element("TITLE").Value);
-                Console.WriteLine("Artist: " + cd.Element("ARTIST").Value);
-                Console.WriteLine("Country: " + cd.Element("COUNTRY").Value);
-                Console.WriteLine("Company: " + cd.Element("COMPANY").Value);
-                Console.WriteLine("Price: " + cd.Element("PRICE").Value);
-                Console.WriteLine("Year: " + cd.Element("YEAR").Value + "\n\n");
-            }
+            printData(cds);
         }
 
         public void printSortedData(String name)
         {
-            IEnumerable<XElement> sortedCds = cds.OrderBy(item => item.Element(name).Value);
+            String dataName = name.ToUpper();
+            IEnumerable<XElement> sortedCds;
 
-            Console.WriteLine("SORTED DATA: \n");
-            foreach (var cd in sortedCds)
+            try
             {
-                Console.WriteLine("Title: " + cd.Element("TITLE").Value);
-                Console.WriteLine("Artist: " + cd.Element("ARTIST").Value);
-                Console.WriteLine("Country: " + cd.Element("COUNTRY").Value);
-                Console.WriteLine("Company: " + cd.Element("COMPANY").Value);
-                Console.WriteLine("Price: " + cd.Element("PRICE").Value);
-                Console.WriteLine("Year: " + cd.Element("YEAR").Value + "\n\n");
+                sortedCds = cds.OrderBy(item => item.Element(dataName).Value);
+                Console.WriteLine("SORTED DATA: \n");
+                printData(sortedCds);
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine("There is no field named: " + name);
+            }
+            
         }
 
         public void printSingleData(String name)
@@ -66,8 +60,6 @@ namespace Linq
                 }           
             }
         }
-
-   
 
         public void printDoubleData(String first, String second)
         {
@@ -91,14 +83,26 @@ namespace Linq
         }
 
         public void printDataWithPrice(String price)
-        {
-            var name = from nm in cds
-                       where (string)nm.Element("PRICE") == price
-                       select nm;
+        {   
+            var cdsWithProperPrice = from nm in cds
+                        where (string)nm.Element("PRICE") == price
+                        select nm;
 
-            Console.WriteLine("Details of CDs with proper price:");
-            foreach (XElement xEle in name)
-                Console.WriteLine(xEle);
+            Console.WriteLine("Details of CDs with price " + price + ":\n");
+            printData(cdsWithProperPrice);  
+        }
+
+        private void printData(IEnumerable<XElement> cds)
+        {
+            foreach (var cd in cds)
+            {
+                Console.WriteLine("Title: " + cd.Element("TITLE").Value);
+                Console.WriteLine("Artist: " + cd.Element("ARTIST").Value);
+                Console.WriteLine("Country: " + cd.Element("COUNTRY").Value);
+                Console.WriteLine("Company: " + cd.Element("COMPANY").Value);
+                Console.WriteLine("Price: " + cd.Element("PRICE").Value);
+                Console.WriteLine("Year: " + cd.Element("YEAR").Value + "\n\n");
+            }
         }
     }
 }
