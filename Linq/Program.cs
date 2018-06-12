@@ -17,9 +17,11 @@ namespace Linq
                 System.Threading.Thread.Sleep(5000);
                 Environment.Exit(0);
             }
-            
 
             data.printData();
+            data.printSingleData("price");
+            data.printDoubleData("artist", "title");
+            data.printDataWithPrice();
 
             Console.ReadLine();
         }
